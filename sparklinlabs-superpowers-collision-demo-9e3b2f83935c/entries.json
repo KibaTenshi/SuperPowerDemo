@@ -1,5 +1,5 @@
 {
-  "nextEntryId": 20,
+  "nextEntryId": 23,
   "nodes": [
     {
       "id": "0",
@@ -15,6 +15,23 @@
       "id": "2",
       "name": "Map",
       "type": "tileMap"
+    },
+    {
+      "id": "20",
+      "name": "Fade",
+      "type": null,
+      "children": [
+        {
+          "id": "21",
+          "name": "Fade Manager",
+          "type": "script"
+        },
+        {
+          "id": "22",
+          "name": "Black Screen",
+          "type": "sprite"
+        }
+      ]
     },
     {
       "id": "13",

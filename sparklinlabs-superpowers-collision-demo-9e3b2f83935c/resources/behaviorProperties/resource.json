@@ -12,6 +12,10 @@
         {
           "name": "jumpSpeed",
           "type": "number"
+        },
+        {
+          "name": "muerto",
+          "type": "boolean"
         }
       ]
     },

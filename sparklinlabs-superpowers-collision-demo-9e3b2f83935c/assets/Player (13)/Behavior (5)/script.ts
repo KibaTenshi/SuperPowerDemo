@@ -3,7 +3,7 @@ var rollingTime=0;
 class PlayerBehavior extends Sup.Behavior {
   speed = 0.3;
   jumpSpeed = 0.45;
-
+  public muerto=false;
   solidBodies: Sup.ArcadePhysics2D.Body[] = [];
   platformBodies: Sup.ArcadePhysics2D.Body[] = [];
   stairsBodies: Sup.ArcadePhysics2D.Body[] = [];
@@ -27,10 +27,8 @@ class PlayerBehavior extends Sup.Behavior {
      if (this.actor.arcadeBody2D.getMovable()==false)
            this.actor.arcadeBody2D.setMovable(true);
     Sup.ArcadePhysics2D.collides(this.actor.arcadeBody2D, this.solidBodies);
-    
-        
+
     let touchSolids = this.actor.arcadeBody2D.getTouches().bottom;
-   
     let velocity = this.actor.arcadeBody2D.getVelocity();
     if (velocity.y <= -0.60){ //BUG caidas altas, sino atraviesa plataformas
       
@@ -39,6 +37,23 @@ class PlayerBehavior extends Sup.Behavior {
     // When falling, we do the check with one-way platforms
     let touchPlatforms = false;
     
+   
+    //Comprobacion de muerte por caida.
+    if(this.muerto==true){
+        if(!Fade.isFading){
+           this.actor.arcadeBody2D.warpPosition(6.552,7.952);
+           
+           while(!Fade.isFading){
+             Sup.log("Entre en While");
+             Fade.start(Fade.Direction.In, null);
+             if(Fade.isFading)
+               break;
+           }
+           Sup.log("Sali del While");
+           this.muerto=false;
+        }
+      
+    }
     //MIENTRAS EL PERSONAJE CAE
     if (velocity.y < 0) {
       //Sup.log("Velocidad X Y"+this.actor.arcadeBody2D.getVelocity());
@@ -104,8 +119,13 @@ class PlayerBehavior extends Sup.Behavior {
     
     
     // We override the `.x` component based on the player's input
-    if (Sup.Input.isKeyDown("LEFT")) {
-      velocity.x = -this.speed;
+    if (Sup.Input.isKeyDown("LEFT")&& !Sup.Input.isKeyDown("RIGHT")) {
+           
+        if (velocity.x >= -this.speed){
+            velocity.x += -0.01;
+            Sup.log("Velocidad: "+velocity.x)
+        }
+    
       //COMPROBACION DE ROLLEO
       if(touchBottom && Sup.Input.isKeyDown("DOWN")){
            velocity.x = -0.25;
@@ -117,23 +137,28 @@ class PlayerBehavior extends Sup.Behavior {
         }       
       // When going left, we have to flip the sprite
       this.actor.spriteRenderer.setHorizontalFlip(true);
-    } else if (Sup.Input.isKeyDown("RIGHT")) {
-      velocity.x = this.speed;
-      //COMPROBACION DE ROLLEO
-      if(touchBottom && Sup.Input.isKeyDown("DOWN")){
-           velocity.x = 0.25;
-           this.actor.arcadeBody2D.setSize(1, 0.8);
-           this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.4 });
-           theyseemeRolling=true;
-           rollingTime++;
-        } 
-      // When going right, we cancel the flip
-      this.actor.spriteRenderer.setHorizontalFlip(false);
     } else{ 
-          velocity.x = 0;
-          this.actor.arcadeBody2D.setSize(1, 1.8);
-          this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.9 });
-          }
+          if (Sup.Input.isKeyDown("RIGHT") && !Sup.Input.isKeyDown("LEFT")) {
+               if (velocity.x <= this.speed){
+                      velocity.x += 0.01;
+                      
+                  }
+              //COMPROBACION DE ROLLEO
+              if(touchBottom && Sup.Input.isKeyDown("DOWN")){
+                   velocity.x = 0.25;
+                   this.actor.arcadeBody2D.setSize(1, 0.8);
+                   this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.4 });
+                   theyseemeRolling=true;
+                   rollingTime++;
+              } 
+              // When going right, we cancel the flip
+              this.actor.spriteRenderer.setHorizontalFlip(false);
+          } else{ 
+            velocity.x = 0;
+            this.actor.arcadeBody2D.setSize(1, 1.8);
+            this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.9 });
+            }
+        }
     // If the player is on the ground and wants to jump,
     // we update the `.y` component accordingly
     
@@ -151,9 +176,10 @@ class PlayerBehavior extends Sup.Behavior {
                      this.actor.spriteRenderer.setAnimation("StopRoll");
                      this.actor.spriteRenderer.setAnimationFrameTime(0.1);
                    }
-                  else
-                     this.actor.spriteRenderer.setAnimation("Idle");
-                     rollingTime=0;
+                  else{
+                     this.actor.spriteRenderer.setAnimation("Idle");     
+                     }
+                rollingTime=0;
               }else {
                     if(theyseemeRolling)
                         if(rollingTime<=10)

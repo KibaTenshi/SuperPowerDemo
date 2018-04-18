@@ -761,7 +761,7 @@
               "config": {
                 "formatVersion": 2,
                 "type": "box",
-                "movable": true,
+                "movable": false,
                 "width": 10,
                 "height": 1,
                 "offset": {
@@ -788,8 +788,8 @@
             }
           ],
           "position": {
-            "x": -2.7142500217942143,
-            "y": -6.103294924534435,
+            "x": -2.7142525819936054,
+            "y": -6.103295135257916,
             "z": -0.00000762939453125
           },
           "orientation": {
