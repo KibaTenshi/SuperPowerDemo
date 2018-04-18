@@ -20,6 +20,12 @@
       "line": 0,
       "parentBehavior": null,
       "properties": []
+    },
+    "DeathBehavior": {
+      "scriptId": "19",
+      "line": 0,
+      "parentBehavior": null,
+      "properties": []
     }
   }
 }

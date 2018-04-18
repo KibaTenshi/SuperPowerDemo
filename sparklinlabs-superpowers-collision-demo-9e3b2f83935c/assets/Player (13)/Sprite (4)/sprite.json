@@ -75,6 +75,20 @@
       "startFrameIndex": 36,
       "endFrameIndex": 39,
       "speed": 0.7
+    },
+    {
+      "id": "9",
+      "name": "Rolling",
+      "startFrameIndex": 21,
+      "endFrameIndex": 23,
+      "speed": 1
+    },
+    {
+      "id": "10",
+      "name": "StopRoll",
+      "startFrameIndex": 24,
+      "endFrameIndex": 24,
+      "speed": 0.3
     }
   ],
   "maps": [

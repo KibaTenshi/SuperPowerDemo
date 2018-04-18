@@ -1,5 +1,5 @@
 {
-  "nextEntryId": 16,
+  "nextEntryId": 20,
   "nodes": [
     {
       "id": "0",
@@ -17,18 +17,6 @@
       "type": "tileMap"
     },
     {
-      "id": "14",
-      "name": "Camera",
-      "type": null,
-      "children": [
-        {
-          "id": "15",
-          "name": "CameraBehavior",
-          "type": "script"
-        }
-      ]
-    },
-    {
       "id": "13",
       "name": "Player",
       "type": null,
@@ -41,6 +29,30 @@
         {
           "id": "5",
           "name": "Behavior",
+          "type": "script"
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "name": "Interactions",
+      "type": null,
+      "children": [
+        {
+          "id": "19",
+          "name": "DeathBehavior",
+          "type": "script"
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Camera",
+      "type": null,
+      "children": [
+        {
+          "id": "15",
+          "name": "CameraBehavior",
           "type": "script"
         }
       ]
