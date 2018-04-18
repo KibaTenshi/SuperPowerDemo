@@ -1,0 +1,25 @@
+{
+  "behaviors": {
+    "PlayerBehavior": {
+      "scriptId": "5",
+      "line": 2,
+      "parentBehavior": null,
+      "properties": [
+        {
+          "name": "speed",
+          "type": "number"
+        },
+        {
+          "name": "jumpSpeed",
+          "type": "number"
+        }
+      ]
+    },
+    "CameraBehavior": {
+      "scriptId": "15",
+      "line": 0,
+      "parentBehavior": null,
+      "properties": []
+    }
+  }
+}

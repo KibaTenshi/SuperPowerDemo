@@ -1,0 +1,59 @@
+{
+  "nextEntryId": 16,
+  "nodes": [
+    {
+      "id": "0",
+      "name": "Scene",
+      "type": "scene"
+    },
+    {
+      "id": "1",
+      "name": "Tile Set",
+      "type": "tileSet"
+    },
+    {
+      "id": "2",
+      "name": "Map",
+      "type": "tileMap"
+    },
+    {
+      "id": "14",
+      "name": "Camera",
+      "type": null,
+      "children": [
+        {
+          "id": "15",
+          "name": "CameraBehavior",
+          "type": "script"
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "name": "Player",
+      "type": null,
+      "children": [
+        {
+          "id": "4",
+          "name": "Sprite",
+          "type": "sprite"
+        },
+        {
+          "id": "5",
+          "name": "Behavior",
+          "type": "script"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "T-Rex",
+      "type": "sprite"
+    },
+    {
+      "id": "6",
+      "name": "Background",
+      "type": "sprite"
+    }
+  ]
+}
