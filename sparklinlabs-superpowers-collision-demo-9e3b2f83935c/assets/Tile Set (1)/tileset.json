@@ -1,5 +1,27 @@
 {
-  "tileProperties": {},
+  "tileProperties": {
+    "2_5": {
+      "Cuesta": "1"
+    },
+    "3_5": {
+      "Cuesta": "2"
+    },
+    "6_7": {
+      "cuesta": "1"
+    },
+    "5_7": {
+      "cuesta": "1"
+    },
+    "7_7": {
+      "cuesta": "2"
+    },
+    "8_7": {
+      "cuesta": "2"
+    },
+    "6_8": {
+      "cuesta": "1"
+    }
+  },
   "grid": {
     "width": 32,
     "height": 32

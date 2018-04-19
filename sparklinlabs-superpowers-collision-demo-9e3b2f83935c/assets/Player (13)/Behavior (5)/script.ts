@@ -1,4 +1,8 @@
 Sup.ArcadePhysics2D.setGravity(0, -0.02);
+var world = new p2.World({
+    gravity:[0,-9.82]
+});
+
 var rollingTime=0;
 class PlayerBehavior extends Sup.Behavior {
   speed = 0.3;
@@ -11,15 +15,17 @@ class PlayerBehavior extends Sup.Behavior {
   platformBodies: Sup.ArcadePhysics2D.Body[] = [];
   stairsBodies: Sup.ArcadePhysics2D.Body[] = [];
 
-
   awake() {
     // We get and store all the bodies in two lists
     let solidActors = Sup.getActor("Solids").getChildren();
-    for (let solidActor of solidActors) this.solidBodies.push(solidActor.arcadeBody2D);
+    for (let solidActor of solidActors)
+      this.solidBodies.push(solidActor.arcadeBody2D);
+    
     let platformActors = Sup.getActor("Platforms").getChildren();
     for (let platformActor of platformActors) this.platformBodies.push(platformActor.arcadeBody2D);
     let stairsActors = Sup.getActor("Stairs").getChildren();
     for (let stairsActor of stairsActors) this.stairsBodies.push(stairsActor.arcadeBody2D);
+     
   }
 
   update() {
@@ -31,10 +37,32 @@ class PlayerBehavior extends Sup.Behavior {
     let theyseemeRolling=false;
      if (this.actor.arcadeBody2D.getMovable()==false)
            this.actor.arcadeBody2D.setMovable(true);
-    Sup.ArcadePhysics2D.collides(this.actor.arcadeBody2D, this.solidBodies); //esto es una constante le esta haciendo chocar con solidbodies.
+    let cuestaArriba=false;
+    let cuestaAbajo=false;
+     //COMPROBACION TILESET CUESTA
+    var x= Math.floor(this.actor.getX());
+    var y= Math.floor(this.actor.getY());
+    var actualTileID=Sup.getActor("Map").tileMapRenderer.getTileMap().getTileAt(1,x+2,y+1);
     
-     if(this.actor.arcadeBody2D.getTouches().top)
-                                 Sup.log("Toque cabeza");
+    var tileProperty= Sup.getActor("Map").tileMapRenderer.getTileSet().getTileProperties(actualTileID);
+    
+   Object.keys(tileProperty)
+  .forEach(function eachKey(key) { 
+    Sup.log(key); // alerts key  
+    Sup.log(tileProperty[key]); // alerts value
+     if(tileProperty[key]=="1"){
+        // Sup.log("Sube"); 
+        cuestaArriba=true;
+     }else if(tileProperty[key]=="2"){
+       //  Sup.log("Baja");
+         cuestaAbajo=true;
+     }
+  });
+    
+    Sup.ArcadePhysics2D.collides(this.actor.arcadeBody2D, this.solidBodies); //esto es una constante le esta haciendo chocar con solidbodies.
+
+    if(this.actor.arcadeBody2D.getTouches().top)
+          Sup.log("Toque cabeza");
     let touchSolids = this.actor.arcadeBody2D.getTouches().bottom;
     let velocity = this.actor.arcadeBody2D.getVelocity();
     if (velocity.y <= -0.60){ //BUG caidas altas, sino atraviesa plataformas
@@ -43,6 +71,10 @@ class PlayerBehavior extends Sup.Behavior {
     }
     // When falling, we do the check with one-way platforms
     let touchPlatforms = false;
+    
+    
+    
+    
     
    
     //Comprobacion de muerte por caida.
@@ -87,6 +119,8 @@ class PlayerBehavior extends Sup.Behavior {
     }
     let touchBottom = touchSolids || touchPlatforms;
     
+   
+    
    //INICIO BUCLE DE COMPROBACIÓN ESCALERAS SUBIR Y BAJAR
         for (let stairBody of this.stairsBodies){
                 if(Sup.ArcadePhysics2D.intersects(this.actor.arcadeBody2D,stairBody))
@@ -130,13 +164,40 @@ class PlayerBehavior extends Sup.Behavior {
            
         if (velocity.x >= -this.speed){
             velocity.x += -0.01;
+        } 
+        if(cuestaArriba){
+           if (velocity.y >= -this.speed)
+            velocity.y += -0.01;
+        
+          
         }
+      this.actor.spriteRenderer.setHorizontalFlip(true);
+    } else{ 
+          if (Sup.Input.isKeyDown("RIGHT") && !Sup.Input.isKeyDown("LEFT")) {
+            // When going right, we cancel the flip
+             this.actor.spriteRenderer.setHorizontalFlip(false);
+             
+             if (velocity.x <= this.speed)
+                    velocity.x += 0.01;
+             Sup.log("cuestaArrib="+cuestaArriba);
+          if(cuestaArriba){
+               velocity.x=this.speed;
+           
+                velocity.y=0.165 ;
+          }
+        } else
+              velocity.x =0;
+    }
     
-      //COMPROBACION DE ROLLEO
+   
+     //COMPROBACION DE ROLLEO
       if(touchBottom && Sup.Input.isKeyDown("DOWN")){
-           velocity.x = -0.25;
+        if(Sup.Input.isKeyDown("LEFT"))  
+            velocity.x = -0.25;
+        else if(Sup.Input.isKeyDown("RIGHT"))
+            velocity.x = +0.25;
            this.actor.arcadeBody2D.setSize(1, 1);
-           this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.51 });
+           this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.5 });
            theyseemeRolling=true;
            rollingTime++;
            
@@ -146,42 +207,11 @@ class PlayerBehavior extends Sup.Behavior {
                  this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.9 });
               }    
       // When going left, we have to flip the sprite
-      this.actor.spriteRenderer.setHorizontalFlip(true);
-    } else{ 
-          if (Sup.Input.isKeyDown("RIGHT") && !Sup.Input.isKeyDown("LEFT")) {
-            // When going right, we cancel the flip
-             this.actor.spriteRenderer.setHorizontalFlip(false);
-             if (velocity.x <= this.speed){
-                    velocity.x += 0.01;
-
-                      }
-                  //COMPROBACION DE ROLLEO
-                
-                  if(touchBottom && Sup.Input.isKeyDown("DOWN")){
-                       velocity.x = 0.25;
-                       this.actor.arcadeBody2D.setSize(1, 1);
-                       this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.45 });
-                       theyseemeRolling=true;
-                       this.ball=true;
-                       rollingTime++;
-                  }else{
-                      if(!theyseemeRolling){
-                            
-                         this.actor.arcadeBody2D.setSize(1, 1.8);
-                         this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.9 });
-                      }  
-                    }
-                     Sup.log("touch TOP="+this.actor.arcadeBody2D.getTouches().top);
-                    Sup.log("theyseemeROlling="+theyseemeRolling);
-          } else{
-              
-              velocity.x = 0;
-          }
-        }
+    
     // If the player is on the ground and wants to jump,
     // we update the `.y` component accordingly
     
-    if (touchBottom && !escalando) {
+    if (touchBottom && !escalando ||cuestaArriba) {
     
            if (Sup.Input.wasKeyJustPressed("UP")&& !enEscalera && !theyseemeRolling) {
                   velocity.y = this.jumpSpeed;
@@ -220,8 +250,11 @@ class PlayerBehavior extends Sup.Behavior {
             if(this.hit) this.actor.spriteRenderer.setAnimation("Hit")
             else    
               if(!enEscalera){
-                   if (velocity.y >= 0.3) this.actor.spriteRenderer.setAnimation("Jump")
-                   else if(!enEscalera)this.actor.spriteRenderer.setAnimation("Fall");
+                   if (velocity.y >= 0.4) 
+                     this.actor.spriteRenderer.setAnimation("Jump")
+                    else if(cuestaArriba && velocity.y>0)
+                          this.actor.spriteRenderer.setAnimation("Run")
+                         else if(!enEscalera && velocity.y<0)this.actor.spriteRenderer.setAnimation("Fall");
             }else 
                   if(escalando && (Sup.Input.isKeyDown("UP") || Sup.Input.isKeyDown("DOWN")))
                       this.actor.spriteRenderer.setAnimation("Climb");
@@ -232,7 +265,7 @@ class PlayerBehavior extends Sup.Behavior {
       // Finally, we apply the velocity back to the ArcadePhysics body
       
       this.actor.arcadeBody2D.setVelocity(velocity);
-      if(!escalando)
+      if(!escalando && !cuestaArriba)
         Sup.ArcadePhysics2D.setGravity(0, -0.02);
     }
 }

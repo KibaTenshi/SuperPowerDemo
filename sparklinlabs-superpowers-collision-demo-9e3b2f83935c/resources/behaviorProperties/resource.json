@@ -2,7 +2,7 @@
   "behaviors": {
     "PlayerBehavior": {
       "scriptId": "5",
-      "line": 2,
+      "line": 6,
       "parentBehavior": null,
       "properties": [
         {
