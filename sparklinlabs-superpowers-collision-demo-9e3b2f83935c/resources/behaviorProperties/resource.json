@@ -16,6 +16,14 @@
         {
           "name": "muerto",
           "type": "boolean"
+        },
+        {
+          "name": "hit",
+          "type": "boolean"
+        },
+        {
+          "name": "ball",
+          "type": "boolean"
         }
       ]
     },

@@ -166,9 +166,11 @@ class PlayerBehavior extends Sup.Behavior {
                        rollingTime++;
                   }else{
                       if(!theyseemeRolling){
-                            
+                         
                          this.actor.arcadeBody2D.setSize(1, 1.8);
                          this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.9 });
+                         if(Sup.ArcadePhysics2D.intersects(this.actor.arcadeBody2D,this.solidBodies))
+                           
                       }  
                     }
                      Sup.log("touch TOP="+this.actor.arcadeBody2D.getTouches().top);

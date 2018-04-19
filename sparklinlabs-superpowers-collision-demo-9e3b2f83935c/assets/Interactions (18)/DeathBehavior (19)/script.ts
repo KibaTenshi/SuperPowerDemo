@@ -12,7 +12,8 @@ class DeathBehavior extends Sup.Behavior {
       for (let deathZoneBody of this.deathZoneBodies)
             if(Sup.ArcadePhysics2D.intersects(Sup.getActor("Player").arcadeBody2D,deathZoneBody)){
               if(!Sup.getActor('Player').getBehavior(PlayerBehavior).muerto){ 
-                 
+                 Sup.getActor('Player').spriteRenderer.setAnimation('Hit');
+                 Sup.getActor('Player').getBehavior(PlayerBehavior).hit=true;
                  Fade.start(Fade.Direction.Out, null);
                  Sup.getActor('Player').getBehavior(PlayerBehavior).muerto=true;
                 }
