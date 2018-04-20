@@ -7,10 +7,10 @@ var rollingTime=0;
 class PlayerBehavior extends Sup.Behavior {
   speed = 0.3;
   jumpSpeed = 0.45;
+  cuestaYSpeed= 0.170;
   public muerto=false;
   public hit=false;
   public ball=false;
-
   solidBodies: Sup.ArcadePhysics2D.Body[] = [];
   platformBodies: Sup.ArcadePhysics2D.Body[] = [];
   stairsBodies: Sup.ArcadePhysics2D.Body[] = [];
@@ -48,8 +48,6 @@ class PlayerBehavior extends Sup.Behavior {
     
    Object.keys(tileProperty)
   .forEach(function eachKey(key) { 
-    Sup.log(key); // alerts key  
-    Sup.log(tileProperty[key]); // alerts value
      if(tileProperty[key]=="1"){
         // Sup.log("Sube"); 
         cuestaArriba=true;
@@ -59,8 +57,9 @@ class PlayerBehavior extends Sup.Behavior {
      }
   });
     
+   
+    
     Sup.ArcadePhysics2D.collides(this.actor.arcadeBody2D, this.solidBodies); //esto es una constante le esta haciendo chocar con solidbodies.
-
     if(this.actor.arcadeBody2D.getTouches().top)
           Sup.log("Toque cabeza");
     let touchSolids = this.actor.arcadeBody2D.getTouches().bottom;
@@ -77,7 +76,7 @@ class PlayerBehavior extends Sup.Behavior {
     
     
    
-    //Comprobacion de muerte por caida.
+    //COMPROBACION MUERTE ZONAS CAIDA
     if(this.muerto==true){
         if(!Fade.isFading){
            this.actor.arcadeBody2D.warpPosition(6.552,7.952);
@@ -93,6 +92,8 @@ class PlayerBehavior extends Sup.Behavior {
         }
       
     }
+    
+    
     //MIENTRAS EL PERSONAJE CAE
     if (velocity.y < 0) {
       //Sup.log("Velocidad X Y"+this.actor.arcadeBody2D.getVelocity());
@@ -132,7 +133,6 @@ class PlayerBehavior extends Sup.Behavior {
                     this.actor.spriteRenderer.setAnimation("Climb");
                     escalando=true;
                   //Sup.log("Estoy escalando!");
-
                   }else {
                       if(enEscalera && !touchSolids && Sup.Input.isKeyDown("DOWN") && !Sup.Input.isKeyDown("RIGHT") && !Sup.Input.isKeyDown("LEFT") ){
                             velocity.y= -0.2;
@@ -140,7 +140,6 @@ class PlayerBehavior extends Sup.Behavior {
                             this.actor.spriteRenderer.setAnimation("Climb");
                             escalando= true;
                           //Sup.log("Estoy bajando!");
-
                           }else
                               if(enEscalera && !touchBottom && !Sup.Input.isKeyDown("RIGHT") && !Sup.Input.isKeyDown("LEFT")) {
                                       if (this.actor.arcadeBody2D.getMovable()==true)
@@ -155,7 +154,7 @@ class PlayerBehavior extends Sup.Behavior {
                                   }
                   }
             }
-    //FIN BUCLE DE COMPROBACIÓN ESCALERAS SUBIR Y BAJAR
+   //FIN BUCLE DE COMPROBACIÓN ESCALERAS SUBIR Y BAJAR
     
     
     
@@ -168,7 +167,7 @@ class PlayerBehavior extends Sup.Behavior {
         if(cuestaArriba){
            if (velocity.y >= -this.speed)
             velocity.y += -0.01;
-        
+          
           
         }
       this.actor.spriteRenderer.setHorizontalFlip(true);
@@ -179,11 +178,11 @@ class PlayerBehavior extends Sup.Behavior {
              
              if (velocity.x <= this.speed)
                     velocity.x += 0.01;
-             Sup.log("cuestaArrib="+cuestaArriba);
+             //Sup.log("cuestaArrib="+cuestaArriba);
+             //Sup.log("TouchBottom="+touchBottom);
           if(cuestaArriba){
                velocity.x=this.speed;
-           
-                velocity.y=0.165 ;
+               velocity.y= this.cuestaYSpeed;         
           }
         } else
               velocity.x =0;
@@ -195,7 +194,7 @@ class PlayerBehavior extends Sup.Behavior {
         if(Sup.Input.isKeyDown("LEFT"))  
             velocity.x = -0.25;
         else if(Sup.Input.isKeyDown("RIGHT"))
-            velocity.x = +0.25;
+            velocity.x = +0.24;
            this.actor.arcadeBody2D.setSize(1, 1);
            this.actor.arcadeBody2D.setOffset({ x: 0, y: 0.5 });
            theyseemeRolling=true;
@@ -210,28 +209,26 @@ class PlayerBehavior extends Sup.Behavior {
     
     // If the player is on the ground and wants to jump,
     // we update the `.y` component accordingly
-    
-    if (touchBottom && !escalando ||cuestaArriba) {
-    
-           if (Sup.Input.wasKeyJustPressed("UP")&& !enEscalera && !theyseemeRolling) {
-                  velocity.y = this.jumpSpeed;
-                  this.actor.spriteRenderer.setAnimation("Jump");
 
-            } 
+    if (touchBottom && !escalando ||cuestaArriba || cuestaAbajo ) {
+          
+           if (Sup.Input.wasKeyJustPressed("UP")&& !enEscalera && !theyseemeRolling) {
+                  Sup.log("Entré");
+                  velocity.y = this.jumpSpeed;
+                  this.actor.spriteRenderer.setAnimation("Jump"); 
+           }
               // There, we should play either 'Idle' or 'Run' depending on the horizontal speed
-              if (velocity.x === 0){ 
+            if (velocity.x === 0){ 
                        if(rollingTime>=10){
                              this.actor.spriteRenderer.setAnimation("StopRoll");
                              this.actor.spriteRenderer.setAnimationFrameTime(0.1);
                              rollingTime=0;
                         }else{
-                             
-                             this.actor.spriteRenderer.setAnimation("Idle"); 
-                             rollingTime=0;
+                             if(velocity.y==0)
+                                 this.actor.spriteRenderer.setAnimation("Idle"); 
+                                 rollingTime=0;
                          }
-                     
-                    
-                
+   
               }else {
                     if(theyseemeRolling){
                         if(rollingTime<=10)
@@ -250,11 +247,12 @@ class PlayerBehavior extends Sup.Behavior {
             if(this.hit) this.actor.spriteRenderer.setAnimation("Hit")
             else    
               if(!enEscalera){
-                   if (velocity.y >= 0.4) 
-                     this.actor.spriteRenderer.setAnimation("Jump")
-                    else if(cuestaArriba && velocity.y>0)
+                   if (velocity.y >= 0.2 || velocity.y==this.cuestaYSpeed){ 
+                     this.actor.spriteRenderer.setAnimation("Jump");
+                     Sup.log("Entre en otro Jump");
+                   }else if(cuestaArriba)
                           this.actor.spriteRenderer.setAnimation("Run")
-                         else if(!enEscalera && velocity.y<0)this.actor.spriteRenderer.setAnimation("Fall");
+                         else if(!enEscalera && velocity.y<0 && !cuestaArriba)this.actor.spriteRenderer.setAnimation("Fall");
             }else 
                   if(escalando && (Sup.Input.isKeyDown("UP") || Sup.Input.isKeyDown("DOWN")))
                       this.actor.spriteRenderer.setAnimation("Climb");
