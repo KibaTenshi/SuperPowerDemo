@@ -1,0 +1,834 @@
+{
+  "nodes": [
+    {
+      "id": "0",
+      "name": "Camera",
+      "children": [],
+      "components": [
+        {
+          "type": "Camera",
+          "config": {
+            "mode": "orthographic",
+            "fov": 45,
+            "orthographicScale": 20,
+            "viewport": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "nearClippingPlane": 0.1,
+            "farClippingPlane": 1000,
+            "depth": 0,
+            "formatVersion": 1
+          },
+          "id": "0"
+        },
+        {
+          "type": "Behavior",
+          "config": {
+            "behaviorName": "CameraBehavior",
+            "propertyValues": {}
+          },
+          "id": "1"
+        }
+      ],
+      "position": {
+        "x": 20,
+        "y": 10,
+        "z": 15
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "visible": true,
+      "layer": 0
+    },
+    {
+      "id": "3",
+      "name": "Background",
+      "children": [],
+      "components": [
+        {
+          "type": "SpriteRenderer",
+          "config": {
+            "spriteAssetId": "6",
+            "animationId": null,
+            "horizontalFlip": false,
+            "verticalFlip": false,
+            "castShadow": false,
+            "receiveShadow": false,
+            "overrideOpacity": false,
+            "opacity": null,
+            "color": "ffffff",
+            "materialType": "basic",
+            "formatVersion": 1
+          },
+          "id": "0"
+        }
+      ],
+      "position": {
+        "x": 40.221,
+        "y": 19.954,
+        "z": -15
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      },
+      "scale": {
+        "x": 2.98,
+        "y": 1.98,
+        "z": 0.1
+      },
+      "visible": true,
+      "layer": 0
+    },
+    {
+      "id": "2",
+      "name": "Player",
+      "children": [],
+      "components": [
+        {
+          "type": "SpriteRenderer",
+          "config": {
+            "spriteAssetId": "4",
+            "animationId": "",
+            "horizontalFlip": false,
+            "verticalFlip": false,
+            "castShadow": false,
+            "receiveShadow": false,
+            "overrideOpacity": false,
+            "opacity": null,
+            "color": "ffffff",
+            "materialType": "basic",
+            "formatVersion": 1
+          },
+          "id": "0"
+        },
+        {
+          "type": "ArcadeBody2D",
+          "config": {
+            "type": "box",
+            "movable": true,
+            "width": 1,
+            "height": 1.8,
+            "tileMapAssetId": null,
+            "tileSetPropertyName": null,
+            "layersIndex": null,
+            "offset": {
+              "x": 0,
+              "y": 0.9
+            },
+            "formatVersion": 2,
+            "bounce": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "id": "1"
+        },
+        {
+          "type": "Behavior",
+          "config": {
+            "behaviorName": "PlayerBehavior",
+            "propertyValues": {}
+          },
+          "id": "2"
+        }
+      ],
+      "position": {
+        "x": 40.6023063659668,
+        "y": 5.039149761199951,
+        "z": 3
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "visible": true,
+      "layer": 0
+    },
+    {
+      "id": "10",
+      "name": "Solids",
+      "children": [
+        {
+          "id": "1",
+          "name": "Map",
+          "children": [],
+          "components": [
+            {
+              "type": "TileMapRenderer",
+              "config": {
+                "tileMapAssetId": "2",
+                "tileSetAssetId": null,
+                "castShadow": false,
+                "receiveShadow": false,
+                "materialType": "basic",
+                "formatVersion": 1
+              },
+              "id": "0"
+            },
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "tileMap",
+                "movable": true,
+                "width": 1,
+                "height": 1,
+                "tileMapAssetId": "2",
+                "tileSetPropertyName": null,
+                "layersIndex": "0",
+                "offset": {
+                  "x": 0,
+                  "y": 0
+                },
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "1"
+            }
+          ],
+          "position": {
+            "x": -11.974,
+            "y": -7.575,
+            "z": -15
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0
+        },
+        {
+          "id": "5",
+          "name": "T-Rex",
+          "children": [],
+          "components": [
+            {
+              "type": "SpriteRenderer",
+              "config": {
+                "spriteAssetId": "8",
+                "animationId": "0",
+                "horizontalFlip": false,
+                "verticalFlip": false,
+                "castShadow": false,
+                "receiveShadow": false,
+                "overrideOpacity": false,
+                "opacity": null,
+                "color": "ffffff",
+                "materialType": "basic",
+                "formatVersion": 1
+              },
+              "id": "0"
+            },
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "box",
+                "movable": false,
+                "width": 1.5,
+                "height": 1.5,
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null,
+                "offset": {
+                  "x": 0.2,
+                  "y": 0.75
+                },
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "1"
+            }
+          ],
+          "position": {
+            "x": 59.36600303649902,
+            "y": -0.5679998397827148,
+            "z": -13.791173338890076
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0
+        }
+      ],
+      "components": [],
+      "position": {
+        "x": 12.003496170043945,
+        "y": 7.5757575035095215,
+        "z": 15
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "visible": true,
+      "layer": 0,
+      "prefabId": null
+    },
+    {
+      "id": "6",
+      "name": "Platforms",
+      "children": [
+        {
+          "id": "7",
+          "name": "Platform 1",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "box",
+                "movable": false,
+                "width": 3.1,
+                "height": 0.4,
+                "offset": {
+                  "x": 0,
+                  "y": -0.2
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null,
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "0"
+            }
+          ],
+          "position": {
+            "x": 3.5,
+            "y": 9,
+            "z": 0
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0,
+          "prefabId": null
+        },
+        {
+          "id": "8",
+          "name": "Platform 2",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "box",
+                "movable": false,
+                "width": 3.1,
+                "height": 0.4,
+                "offset": {
+                  "x": 0,
+                  "y": -0.2
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null,
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "0"
+            }
+          ],
+          "position": {
+            "x": 3.5,
+            "y": 13,
+            "z": 0
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0,
+          "prefabId": null
+        },
+        {
+          "id": "9",
+          "name": "Platform 4",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "box",
+                "movable": false,
+                "width": 5.8,
+                "height": 0.4,
+                "offset": {
+                  "x": 0,
+                  "y": -0.2
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null,
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "0"
+            }
+          ],
+          "position": {
+            "x": 17.926231384277344,
+            "y": 15.996097564697266,
+            "z": 0
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0,
+          "prefabId": null
+        },
+        {
+          "id": "13",
+          "name": "Platform 5",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "box",
+                "movable": false,
+                "width": 32.9,
+                "height": 0.4,
+                "offset": {
+                  "x": 0,
+                  "y": -0.2
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null,
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "0"
+            }
+          ],
+          "position": {
+            "x": 38.540733337402344,
+            "y": 15.991869926452637,
+            "z": 0
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0
+        },
+        {
+          "id": "17",
+          "name": "Platform 6",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "box",
+                "movable": false,
+                "width": 3.1,
+                "height": 0.4,
+                "offset": {
+                  "x": 0,
+                  "y": -0.2
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null,
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "0"
+            }
+          ],
+          "position": {
+            "x": 9.534236907958984,
+            "y": 15.996662139892578,
+            "z": 0
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0
+        },
+        {
+          "id": "18",
+          "name": "Platform 8",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "box",
+                "movable": false,
+                "width": 1,
+                "height": 0.4,
+                "offset": {
+                  "x": 0,
+                  "y": -0.2
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null,
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "0"
+            }
+          ],
+          "position": {
+            "x": 40.498043060302734,
+            "y": 19.988765716552734,
+            "z": 0
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0
+        },
+        {
+          "id": "19",
+          "name": "Platform 7",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "type": "box",
+                "movable": false,
+                "width": 1,
+                "height": 0.4,
+                "offset": {
+                  "x": 0,
+                  "y": -0.2
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null,
+                "formatVersion": 2,
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "id": "0"
+            }
+          ],
+          "position": {
+            "x": 40.498043060302734,
+            "y": 23.990192413330078,
+            "z": 0
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0
+        }
+      ],
+      "components": [],
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "visible": true,
+      "layer": 0,
+      "prefabId": null
+    },
+    {
+      "id": "14",
+      "name": "Stairs",
+      "children": [
+        {
+          "id": "15",
+          "name": "stair 1",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "formatVersion": 2,
+                "type": "box",
+                "movable": false,
+                "width": 0.45,
+                "height": 11.5,
+                "offset": {
+                  "x": 0,
+                  "y": 0
+                },
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null
+              },
+              "id": "0"
+            }
+          ],
+          "position": {
+            "x": 0.42696189880371094,
+            "y": -4.488512992858887,
+            "z": -9.351245760917664
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0,
+          "prefab": null
+        }
+      ],
+      "components": [],
+      "position": {
+        "x": 21.093746185302734,
+        "y": 14.939207077026367,
+        "z": 10.402633666992188
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "visible": true,
+      "layer": 0,
+      "prefab": null
+    },
+    {
+      "id": "23",
+      "name": "Deaths",
+      "children": [
+        {
+          "id": "24",
+          "name": "DeathZone 1",
+          "children": [],
+          "components": [
+            {
+              "type": "ArcadeBody2D",
+              "config": {
+                "formatVersion": 2,
+                "type": "box",
+                "movable": false,
+                "width": 10,
+                "height": 1,
+                "offset": {
+                  "x": 0,
+                  "y": 0
+                },
+                "bounce": {
+                  "x": 0,
+                  "y": 0
+                },
+                "tileMapAssetId": null,
+                "tileSetPropertyName": null,
+                "layersIndex": null
+              },
+              "id": "0"
+            },
+            {
+              "type": "Behavior",
+              "config": {
+                "behaviorName": "DeathBehavior",
+                "propertyValues": {}
+              },
+              "id": "1"
+            }
+          ],
+          "position": {
+            "x": -2.7142525819936054,
+            "y": -6.103295135257916,
+            "z": -0.00000762939453125
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "visible": true,
+          "layer": 0,
+          "prefab": null
+        }
+      ],
+      "components": [],
+      "position": {
+        "x": 43.118812561035156,
+        "y": 12.640649795532227,
+        "z": -1.4201948642730713
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      },
+      "scale": {
+        "x": 2.9800000190734863,
+        "y": 1.9800000190734863,
+        "z": 0.10000000149011612
+      },
+      "visible": true,
+      "layer": 0,
+      "prefab": null
+    }
+  ],
+  "formatVersion": 1
+}

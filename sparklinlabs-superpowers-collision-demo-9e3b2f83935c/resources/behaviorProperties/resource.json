@@ -2,7 +2,7 @@
   "behaviors": {
     "PlayerBehavior": {
       "scriptId": "5",
-      "line": 6,
+      "line": 4,
       "parentBehavior": null,
       "properties": [
         {
@@ -11,10 +11,6 @@
         },
         {
           "name": "jumpSpeed",
-          "type": "number"
-        },
-        {
-          "name": "cuestaYSpeed",
           "type": "number"
         },
         {
@@ -39,6 +35,12 @@
     },
     "DeathBehavior": {
       "scriptId": "19",
+      "line": 0,
+      "parentBehavior": null,
+      "properties": []
+    },
+    "ScriptBehavior": {
+      "scriptId": "32",
       "line": 0,
       "parentBehavior": null,
       "properties": []

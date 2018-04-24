@@ -1,14 +1,14 @@
 {
-  "nextEntryId": 23,
+  "nextEntryId": 35,
   "nodes": [
-    {
-      "id": "0",
-      "name": "Scene",
-      "type": "scene"
-    },
     {
       "id": "1",
       "name": "Tile Set",
+      "type": "tileSet"
+    },
+    {
+      "id": "34",
+      "name": "TileSet 2",
       "type": "tileSet"
     },
     {
@@ -17,21 +17,9 @@
       "type": "tileMap"
     },
     {
-      "id": "20",
-      "name": "Fade",
-      "type": null,
-      "children": [
-        {
-          "id": "21",
-          "name": "Fade Manager",
-          "type": "script"
-        },
-        {
-          "id": "22",
-          "name": "Black Screen",
-          "type": "sprite"
-        }
-      ]
+      "id": "33",
+      "name": "Tutorial Map",
+      "type": "tileMap"
     },
     {
       "id": "13",
@@ -47,6 +35,45 @@
           "id": "5",
           "name": "Behavior",
           "type": "script"
+        }
+      ]
+    },
+    {
+      "id": "24",
+      "name": "Scenas",
+      "type": null,
+      "children": [
+        {
+          "id": "23",
+          "name": "Secena CV",
+          "type": "scene"
+        },
+        {
+          "id": "31",
+          "name": "Scene tutorial",
+          "type": "scene"
+        },
+        {
+          "id": "0",
+          "name": "Scene",
+          "type": "scene"
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "name": "Fade",
+      "type": null,
+      "children": [
+        {
+          "id": "21",
+          "name": "Fade Manager",
+          "type": "script"
+        },
+        {
+          "id": "22",
+          "name": "Black Screen",
+          "type": "sprite"
         }
       ]
     },
@@ -83,6 +110,38 @@
       "id": "6",
       "name": "Background",
       "type": "sprite"
+    },
+    {
+      "id": "26",
+      "name": "parallax",
+      "type": null,
+      "children": [
+        {
+          "id": "27",
+          "name": "parallax 1",
+          "type": "sprite"
+        },
+        {
+          "id": "28",
+          "name": "parallax 2",
+          "type": "sprite"
+        },
+        {
+          "id": "30",
+          "name": "parallax 3",
+          "type": "sprite"
+        },
+        {
+          "id": "29",
+          "name": "parallax 4",
+          "type": "sprite"
+        },
+        {
+          "id": "32",
+          "name": "Parallax",
+          "type": "script"
+        }
+      ]
     }
   ]
 }
