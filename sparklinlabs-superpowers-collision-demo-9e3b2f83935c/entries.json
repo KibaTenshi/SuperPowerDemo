@@ -1,5 +1,5 @@
 {
-  "nextEntryId": 35,
+  "nextEntryId": 52,
   "nodes": [
     {
       "id": "1",
@@ -19,6 +19,11 @@
     {
       "id": "33",
       "name": "Tutorial Map",
+      "type": "tileMap"
+    },
+    {
+      "id": "43",
+      "name": "CV Map",
       "type": "tileMap"
     },
     {
@@ -44,11 +49,6 @@
       "type": null,
       "children": [
         {
-          "id": "23",
-          "name": "Secena CV",
-          "type": "scene"
-        },
-        {
           "id": "31",
           "name": "Scene tutorial",
           "type": "scene"
@@ -56,6 +56,16 @@
         {
           "id": "0",
           "name": "Scene",
+          "type": "scene"
+        },
+        {
+          "id": "41",
+          "name": "Scena CV EN",
+          "type": "scene"
+        },
+        {
+          "id": "44",
+          "name": "Scena CV ES",
           "type": "scene"
         }
       ]
@@ -86,6 +96,11 @@
           "id": "19",
           "name": "DeathBehavior",
           "type": "script"
+        },
+        {
+          "id": "46",
+          "name": "Teleport Behavior",
+          "type": "script"
         }
       ]
     },
@@ -102,13 +117,53 @@
       ]
     },
     {
+      "id": "39",
+      "name": "Arrow Up",
+      "type": "sprite"
+    },
+    {
       "id": "8",
       "name": "T-Rex",
       "type": "sprite"
     },
     {
+      "id": "40",
+      "name": "Arrow Right",
+      "type": "sprite"
+    },
+    {
       "id": "6",
       "name": "Background",
+      "type": "sprite"
+    },
+    {
+      "id": "42",
+      "name": "CV EN",
+      "type": "sprite"
+    },
+    {
+      "id": "45",
+      "name": "CV ES",
+      "type": "sprite"
+    },
+    {
+      "id": "47",
+      "name": "Keys1",
+      "type": "sprite"
+    },
+    {
+      "id": "48",
+      "name": "Keys2",
+      "type": "sprite"
+    },
+    {
+      "id": "49",
+      "name": "Keys3",
+      "type": "sprite"
+    },
+    {
+      "id": "51",
+      "name": "LostTY",
       "type": "sprite"
     },
     {
@@ -137,11 +192,16 @@
           "type": "sprite"
         },
         {
-          "id": "32",
-          "name": "Parallax",
+          "id": "35",
+          "name": "ParallaxBehavior",
           "type": "script"
         }
       ]
+    },
+    {
+      "id": "50",
+      "name": "Lost Constellation",
+      "type": "sound"
     }
   ]
 }

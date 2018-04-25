@@ -1,4 +1,5 @@
 Sup.ArcadePhysics2D.setGravity(0, -0.02);
+let inGameMusicPlayer = new Sup.Audio.SoundPlayer("Lost Constellation", 1.0, { loop: true });
 
 
 var rollingTime=0;
@@ -8,13 +9,17 @@ class PlayerBehavior extends Sup.Behavior {
   public muerto=false;
   public hit=false;
   public ball=false;
-
+  public teleported=false;
+  public sceneName="";
   solidBodies: Sup.ArcadePhysics2D.Body[] = [];
   platformBodies: Sup.ArcadePhysics2D.Body[] = [];
   stairsBodies: Sup.ArcadePhysics2D.Body[] = [];
+  
+  checkPoint: Sup.Math.Vector3;
 
   awake() {
     // We get and store all the bodies in two lists
+    inGameMusicPlayer.play();
     let solidActors = Sup.getActor("Solids").getChildren();
     for (let solidActor of solidActors)
       this.solidBodies.push(solidActor.arcadeBody2D);
@@ -22,11 +27,11 @@ class PlayerBehavior extends Sup.Behavior {
     for (let platformActor of platformActors) this.platformBodies.push(platformActor.arcadeBody2D);
     let stairsActors = Sup.getActor("Stairs").getChildren();
     for (let stairsActor of stairsActors) this.stairsBodies.push(stairsActor.arcadeBody2D);
-     
+     this.checkPoint=this.actor.getLocalPosition();
   }
 
   update() {
-  
+    
     // First, we do the check with solid bodies
     let ballForm=false;
     let enEscalera= false;
@@ -58,8 +63,7 @@ class PlayerBehavior extends Sup.Behavior {
     
     Sup.ArcadePhysics2D.collides(this.actor.arcadeBody2D, this.solidBodies); //esto es una constante le esta haciendo chocar con solidbodies.
 
-    if(this.actor.arcadeBody2D.getTouches().top)
-          Sup.log("Toque cabeza");
+ 
     let touchSolids = this.actor.arcadeBody2D.getTouches().bottom;
     let velocity = this.actor.arcadeBody2D.getVelocity();
     if (velocity.y <= -0.60){ //BUG caidas altas, sino atraviesa plataformas
@@ -70,11 +74,10 @@ class PlayerBehavior extends Sup.Behavior {
     let touchPlatforms = false;
     
 
-   
     //Comprobacion de muerte por caida.
     if(this.muerto==true){
         if(!Fade.isFading){
-           this.actor.arcadeBody2D.warpPosition(6.552,7.952);
+           this.actor.arcadeBody2D.warpPosition(this.checkPoint);
            
            while(!Fade.isFading){
              Fade.start(Fade.Direction.In, null);
@@ -85,6 +88,24 @@ class PlayerBehavior extends Sup.Behavior {
            this.muerto=false;
            this.hit=false;
         }
+      
+    }
+    
+    //TELEPORT DEL PERSONAJE
+    if(this.teleported==true){
+      if(!Fade.isFading){
+        if(this.sceneName=="Teleport 1")
+          Sup.loadScene("Scenas/Scena CV EN");
+        if (this.sceneName=="Teleport 2")
+          Sup.loadScene("Scenas/Scena CV ES");
+        while(!Fade.isFading){
+          Fade.start(Fade.Direction.In, null);
+          if(Fade.isFading)
+            break;
+        }
+        this.teleported=false;
+      }
+      
       
     }
     //MIENTRAS EL PERSONAJE CAE
